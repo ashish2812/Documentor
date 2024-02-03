@@ -1,0 +1,17 @@
+server:
+  port: 9080
+
+spring:
+  application:
+    name: Document-Processing-Service
+  data:
+    mongodb:
+      database: Document_processing_service
+      host: localhost
+      port: 27017
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
