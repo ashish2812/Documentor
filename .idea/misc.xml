@@ -8,6 +8,9 @@
         <option value="$PROJECT_DIR$/DocumentProcessingService/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/DataServiceRetrieveService/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/data-store-retrieve-service/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-collaboration-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
