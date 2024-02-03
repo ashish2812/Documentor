@@ -13,10 +13,14 @@
         <module name="DataServiceRetrieveService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DataStoreRetrieveService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DataServiceRetrieveService" options="-parameters" />
+      <module name="DataStoreRetrieveService" options="-parameters" />
       <module name="DocumentProcessingService" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
