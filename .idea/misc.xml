@@ -8,7 +8,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/DocumentProcessingService/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/DataServiceRetrieveService/pom.xml" />
         <option value="$PROJECT_DIR$/notification-service/pom.xml" />
@@ -18,11 +17,21 @@
         <option value="$PROJECT_DIR$/core-utils/kafka/pom.xml" />
         <option value="$PROJECT_DIR$/core-utils/base/pom.xml" />
         <option value="$PROJECT_DIR$/core-utils/documentor-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway-v2/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server-v2/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/document-processing-service-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/document-processing-service-v2/data-store-retrieve-service/pom.xml" />
+        <option value="$PROJECT_DIR$/document-processing-service-v2/DocumentProcessingService/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/DataServiceRetrieveService/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/document-processing-service-v2/data-store-retrieve-service/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
       </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

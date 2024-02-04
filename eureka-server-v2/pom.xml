@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>api-gateway-v2-parent</artifactId>
+    <artifactId>eureka-server-v2-parent</artifactId>
     <version>1.0.0</version>
-    <name>api-gateway-v2</name>
+    <name>eureka-server-v2</name>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.example</groupId>
@@ -14,7 +14,7 @@
     </parent>
 
     <modules>
-        <module>api-gateway</module>
+        <module>eureka-server</module>
         <module>../core-utils/base</module>
         <module>../core-utils/kafka</module>
     </modules>

@@ -1,9 +1,7 @@
 /**
- * 
+ *
  */
 package org.example.kafka.producer;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -13,16 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * @author naveen.kumar
+ * @author Ashish
  *
- * @date 28-Oct-2019
+ * @date 04-Feb-2024
  *
  **/
 
@@ -30,55 +26,55 @@ import java.util.concurrent.CompletableFuture;
 @Log4j2
 public class NotificationProducer {
 
-	@Autowired
-	private ObjectMapper objectMapper;
+//	@Autowired
+//	private ObjectMapper objectMapper;
 
-	@Autowired
-	private KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-	public void publish(String topic, String className, Object value) {
+    public void publish(String topic, String className, Object value) {
 
-			ProducerRecord<String, String> record = null;
+        ProducerRecord<String, String> record = null;
 
-			try {
-				record = new ProducerRecord<String, String>(topic, className, objectMapper.writeValueAsString(value));
-			} catch (Exception e) {
-				log.error("Failed to serialize message to send to topic: " + topic, e);
-			}
+        try {
+            //record = new ProducerRecord<String, String>(topic, className, objectMapper.writeValueAsString(value));
+        } catch (Exception e) {
+            log.error("Failed to serialize message to send to topic: " + topic, e);
+        }
 
-			publishRecord(record);
-	}
+        publishRecord(record);
+    }
 
-	public void publish(String topic, int partition, String className, Object value) {
+    public void publish(String topic, int partition, String className, Object value) {
 
-		ProducerRecord<String, String> record = null;
-		try {
-			record = new ProducerRecord<String, String>(topic, partition, className, objectMapper.writeValueAsString(value));
-		} catch (Exception e) {
-			log.error("Failed to serialize message to send to topic: " + topic, e);
-		}
+        ProducerRecord<String, String> record = null;
+        try {
+            //record = new ProducerRecord<String, String>(topic, partition, className, objectMapper.writeValueAsString(value));
+        } catch (Exception e) {
+            log.error("Failed to serialize message to send to topic: " + topic, e);
+        }
 
-		publishRecord(record);
-	}
+        publishRecord(record);
+    }
 
-	private void publishRecord(ProducerRecord<String, String> record) {
+    private void publishRecord(ProducerRecord<String, String> record) {
 
-		if (Objects.nonNull(record)) {
+        if (Objects.nonNull(record)) {
 
-			String messageId = DocumentorUtils.generateUniqueId();
-			record.headers().add("messageId", messageId.getBytes());
+            String messageId = DocumentorUtils.generateUniqueId();
+            record.headers().add("messageId", messageId.getBytes());
 
-			log.info("Publishing records: {}", record);
+            log.info("Publishing records: {}", record);
 
-			CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(record);
+            CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(record);
 
-			future.thenAccept(sendResult -> {
-				log.info("Message sent successfully! Offset: " + sendResult.getRecordMetadata().offset());
-			}).exceptionally(ex -> {
-				log.error("Error sending message: " + ex.getMessage());
-				throw new KafkaException(ex.getMessage(),ex.getCause());
-			});
-		}
-	}
+            future.thenAccept(sendResult -> {
+                log.info("Message sent successfully! Offset: " + sendResult.getRecordMetadata().offset());
+            }).exceptionally(ex -> {
+                log.error("Error sending message: " + ex.getMessage());
+                throw new KafkaException(ex.getMessage(), ex.getCause());
+            });
+        }
+    }
 
 }

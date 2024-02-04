@@ -8,18 +8,22 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="realtime-collaboration-service" />
-        <module name="DocumentProcessingService" />
         <module name="data-store-retrieve-service" />
         <module name="kafka" />
         <module name="api-gateway" />
-        <module name="eureka-server" />
+        <module name="document-processing-service" />
+        <module name="eureka-server (1)" />
         <module name="notification-service" />
         <module name="DataServiceRetrieveService" />
         <module name="base" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="data-store-retrieve-service (1)" target="17" />
       <module name="DataStoreRetrieveService" target="17" />
+      <module name="document-processing-service-v2" target="1.5" />
+      <module name="DocumentProcessingService" target="17" />
+      <module name="eureka-server" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -31,7 +35,10 @@
       <module name="base" options="-parameters" />
       <module name="core-utils" options="" />
       <module name="data-store-retrieve-service" options="-parameters" />
+      <module name="data-store-retrieve-service (1)" options="-parameters" />
+      <module name="document-processing-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="eureka-server (1)" options="-parameters" />
       <module name="kafka" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="realtime-collaboration-service" options="-parameters" />
