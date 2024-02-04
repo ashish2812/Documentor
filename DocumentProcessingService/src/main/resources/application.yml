@@ -10,6 +10,16 @@ spring:
       host: localhost
       port: 27017
 
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  # Serializer for keys
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer  # Serializer for values
+      acks: 1
+      retries: 3  # Number of retries before giving up sending a message
+      batch-size: 16384  # Size of batches to send to Kafka
+      buffer-memory: 33554432  # Total memory size the producer can use to buffer records waiting to be sent to the server
+
 
 eureka:
   client:

@@ -10,10 +10,12 @@
         <module name="realtime-collaboration-service" />
         <module name="DocumentProcessingService" />
         <module name="data-store-retrieve-service" />
+        <module name="kafka" />
         <module name="api-gateway" />
         <module name="eureka-server" />
         <module name="notification-service" />
         <module name="DataServiceRetrieveService" />
+        <module name="base" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,8 +28,11 @@
       <module name="DataStoreRetrieveService" options="-parameters" />
       <module name="DocumentProcessingService" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
+      <module name="base" options="-parameters" />
+      <module name="core-utils" options="" />
       <module name="data-store-retrieve-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="kafka" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="realtime-collaboration-service" options="-parameters" />
     </option>
