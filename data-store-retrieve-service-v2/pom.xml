@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>document-processing-service-v2-parent</artifactId>
+    <artifactId>data-store-retrieve-service-v2-parent</artifactId>
     <version>1.0.0</version>
-    <name>document-processing-service-v2</name>
+    <name>data-store-retrieve-service-v2</name>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.example</groupId>
@@ -13,7 +13,7 @@
     </parent>
 
     <modules>
-        <module>DocumentProcessingService</module>
+        <module>data-store-retrieve-service</module>
         <module>../core-utils/base</module>
         <module>../core-utils/kafka</module>
     </modules>

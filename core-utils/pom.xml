@@ -4,10 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>core-utils</artifactId>
+
+    <!--    in a Maven POM file, it means that the project is configured to produce a POM artifact.
+    This is often the case for parent projects or projects that are intended to serve
+    as a dependency management module without producing a runnable JAR or WAR fil-->
     <packaging>pom</packaging>
 
     <inceptionYear>2024</inceptionYear>
 
+
+    <!--NOTE: This is the parent for every Microservice any dependency that is required for all the microservice can be added here
+    for example: spring-boot-starter-parent this dependency is parent of spring boot application we don't need to add this
+    each and every microservice.
+    -->
     <parent>
         <groupId>org.example</groupId>
         <artifactId>documentor-parent</artifactId>
@@ -15,6 +24,7 @@
         <relativePath>./documentor-parent</relativePath> <!-- lookup parent from repository -->
     </parent>
 
+    <!--Adding module here-->
     <modules>
         <module>base</module>
         <module>kafka</module>

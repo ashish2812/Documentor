@@ -12,7 +12,9 @@
     <file url="file://$PROJECT_DIR$/core-utils/kafka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core-utils/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core-utils/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/data-store-retrieve-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-store-retrieve-service-v2/data-store-retrieve-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-store-retrieve-service-v2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/data-store-retrieve-service-v2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/document-processing-service-v2/DocumentProcessingService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/document-processing-service-v2/data-store-retrieve-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/document-processing-service-v2/src/main/java" charset="UTF-8" />
@@ -21,7 +23,11 @@
     <file url="file://$PROJECT_DIR$/eureka-server-v2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server-v2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/notification-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/realtime-collaboration-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notificatio-service-v2/notification-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notificatio-service-v2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notificatio-service-v2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-collaboration-service-v2/realtime-collaboration-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-collaboration-service-v2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-collaboration-service-v2/src/main/resources" charset="UTF-8" />
   </component>
 </project>

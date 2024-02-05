@@ -12,7 +12,6 @@
         <option value="$PROJECT_DIR$/DataServiceRetrieveService/pom.xml" />
         <option value="$PROJECT_DIR$/notification-service/pom.xml" />
         <option value="$PROJECT_DIR$/data-store-retrieve-service/pom.xml" />
-        <option value="$PROJECT_DIR$/realtime-collaboration-service/pom.xml" />
         <option value="$PROJECT_DIR$/core-utils/pom.xml" />
         <option value="$PROJECT_DIR$/core-utils/kafka/pom.xml" />
         <option value="$PROJECT_DIR$/core-utils/base/pom.xml" />
@@ -24,6 +23,11 @@
         <option value="$PROJECT_DIR$/document-processing-service-v2/pom.xml" />
         <option value="$PROJECT_DIR$/document-processing-service-v2/data-store-retrieve-service/pom.xml" />
         <option value="$PROJECT_DIR$/document-processing-service-v2/DocumentProcessingService/pom.xml" />
+        <option value="$PROJECT_DIR$/data-store-retrieve-service-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/notificatio-service-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-collaboration-service-v2/pom.xml" />
+        <option value="$PROJECT_DIR$/notificatio-service-v2/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-collaboration-service-v2/realtime-collaboration-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
