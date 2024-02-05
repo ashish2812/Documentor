@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>core-utils</artifactId>
+
+    <!--    in a Maven POM file, it means that the project is configured to produce a POM artifact.
+    This is often the case for parent projects or projects that are intended to serve
+    as a dependency management module without producing a runnable JAR or WAR fil-->
+    <packaging>pom</packaging>
+
+    <inceptionYear>2024</inceptionYear>
+
+
+    <!--NOTE: This is the parent for every Microservice any dependency that is required for all the microservice can be added here
+    for example: spring-boot-starter-parent this dependency is parent of spring boot application we don't need to add this
+    each and every microservice.
+    -->
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>documentor-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>./documentor-parent</relativePath> <!-- lookup parent from repository -->
+    </parent>
+
+    <!--Adding module here-->
+    <modules>
+        <module>base</module>
+        <module>kafka</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

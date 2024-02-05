@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>document-processing-service-v2-parent</artifactId>
+    <version>1.0.0</version>
+    <name>document-processing-service-v2</name>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>documentor-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../core-utils/documentor-parent</relativePath>
+    </parent>
+
+    <modules>
+        <module>DocumentProcessingService</module>
+        <module>../core-utils/base</module>
+        <module>../core-utils/kafka</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>api-gateway-v2</id>
+            <properties>
+                <sonar.skip>false</sonar.skip>
+            </properties>
+        </profile>
+    </profiles>
+</project>
