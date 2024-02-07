@@ -15,7 +15,7 @@ public class ApiLocator {
     public RouteLocator getwayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/dpm/**") //url for the currency-exchange
+                        .path("/api/v1/dpms/**") //url for the currency-exchange
                         .uri("lb://Document-Processing-Service") //LoadBalancer of currency-exchange that are the instances registered in eureka server
                 )
                 .build();
