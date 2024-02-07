@@ -4,3 +4,33 @@ server:
 spring:
   application:
     name: Data-store-retrieve-service
+  data:
+    mongodb:
+      database: Document_processing_service
+      host: localhost
+      port: 27017
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      acks: 1
+      retries: 3  # Number of retries before giving up sending a message
+      batch-size: 16384  # Size of batches to send to Kafka
+      buffer-memory: 33554432  # Total memory size the producer can use to buffer records waiting to be sent to the server
+    consumer:
+      autostart: true
+      bootstrap-servers: localhost:9092
+      #auto-commit-interval: 1000
+      group-id: data-store-service-test
+      heartbeat-interval: 10
+      enable-auto-commit: false # This will not mark message acknowledged
+      max-poll-records: 1
+    listener:
+      ack-mode: manual_immediate
+
+
+dsrms:
+  kafka:
+    topic:
+      notification-service: notification_service
+      dsrms-store-user: dsrms-store-user

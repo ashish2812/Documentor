@@ -1,21 +1,21 @@
 package org.example.documentprocessingservice.serviceImp;
 
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.example.documentprocessingservice.services.KafkaServiceProducer;
+import org.example.kafka.producer.NotificationProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaServiceProducerImp implements KafkaServiceProducer {
 
     @Autowired
-    KafkaTemplate<String,String> kafkaTemplate;
+    private NotificationProducer notificationProducer;
+
 
     @Override
     public void sentMessage(String message) {
-        ProducerRecord<String, String> record = new ProducerRecord<>("new_topic", "simple_key", message);
-        record.headers().add("headerKey", "headerValue.getBytes()".getBytes());
-        kafkaTemplate.send(record);
+        for (int i = 0;i<10;i++) {
+            notificationProducer.publish("new_topic", String.class.getName(), "This is the value" + i);
+        }
     }
 }

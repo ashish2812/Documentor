@@ -16,6 +16,7 @@
         <module>data-store-retrieve-service</module>
         <module>../core-utils/base</module>
         <module>../core-utils/kafka</module>
+        <module>../core-utils/pojo</module>
     </modules>
 
     <build>
