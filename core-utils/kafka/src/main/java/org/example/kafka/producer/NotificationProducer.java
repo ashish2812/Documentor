@@ -80,4 +80,38 @@ public class NotificationProducer {
         }
     }
 
+    public void publish(String topic, String className, String value, String messageId) {
+
+        ProducerRecord<String, String> record = null;
+        if(!messageId.isEmpty()){
+            try {
+                record = new ProducerRecord<String, String>(topic, className, value);
+            } catch (Exception e) {
+                log.error("Failed to serialize message to send to topic: " + topic, e);
+            }
+
+            publishRecord(record,messageId);
+        }
+    }
+
+    private void publishRecord(ProducerRecord<String, String> record,String messageId) {
+
+        if (Objects.nonNull(record)) {
+
+            record.headers().add(DocumentoConstants.MESSAGE_ID, messageId.getBytes());
+
+            log.info("Publishing records: {}", record);
+
+            CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(record);
+
+            future.thenAccept(sendResult -> {
+                log.info("\nMessage sent successfully! Offset: " + sendResult.getRecordMetadata().offset()
+                        +"\nmessageId: "+ messageId);
+            }).exceptionally(ex -> {
+                log.error("Error sending message: " + ex.getMessage());
+                throw new KafkaException(ex.getMessage(), ex.getCause());
+            });
+        }
+    }
+
 }

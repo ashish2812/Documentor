@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -26,10 +27,12 @@ public class KafkaDeadLetterDlqConverter {
     private static final Charset charset = StandardCharsets.UTF_8;
     Map<String, String> headersValues = new LinkedHashMap<>();
 
-    public ConsumerRecord<?, ?> kafkaDeadLetter(ConsumerRecord<?, ?> record, Exception ex) {
+    public ConsumerRecord<?, ?> kafkaDeadLetter(ConsumerRecord<?, ?> record, Exception ex, Short status) {
 
         String topic = record.topic();
         int partition = record.partition();
+        String exceptionMessage = Objects.isNull(ex) ? null : ex.getLocalizedMessage();
+        String exceptionClassName = Objects.isNull(ex) ? null : ex.getClass().getSimpleName();
         String messageId = "";
         for (Header header : record.headers()) {
             if (header.key().equalsIgnoreCase(DocumentoConstants.MESSAGE_ID)) {
@@ -40,12 +43,7 @@ public class KafkaDeadLetterDlqConverter {
                 headersValues.put(headerKey, value);
             }
         }
-        log.info("\nMessageId: " + messageId + "\n"
-                + " Topic: " + record.topic() + "\n"
-                + " Class: " + record.key() + "\n"
-                + " data: " + record.value() + "\n"
-                + " Exception: " + ex.getLocalizedMessage()
-        );
+        log.info("MessageId: " + messageId + " Topic: " + record.topic() + " Class: " + record.key() + " data: " + record.value() + " Exception: " + exceptionMessage);
 
         KafkaDeadLetterDto kafkaDeadLetterDto = KafkaDeadLetterDto
                 .builder()
@@ -53,13 +51,13 @@ public class KafkaDeadLetterDlqConverter {
                 .data(record.value().toString())
                 .headers(headersValues.isEmpty() ? null : headersValues.toString())
                 .isMailSent(Boolean.FALSE)
-                .exceptionClass(ex.getClass().toString())
-                .exceptionMessage(ex.getLocalizedMessage())
+                .exceptionClass(exceptionClassName)
+                .exceptionMessage(exceptionMessage)
                 .isRetryableException(Boolean.TRUE)
                 .createdOn(LocalDateTime.now())
                 .clazzName(record.key().toString())
                 .topicName(record.topic())
-                .status((short) 0)
+                .status(Objects.nonNull(status)?status:1)
                 .build();
         String value;
         long offset = record.offset();
