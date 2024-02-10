@@ -9,6 +9,15 @@ spring:
       database: Document_processing_service
       host: localhost
       port: 27017
+  datasource:
+    username: root
+    password: Hrhk@9090
+    url: jdbc:mysql://localhost:3306/data_store_retrieve_service
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
   kafka:
     producer:
@@ -34,3 +43,8 @@ dsrms:
     topic:
       notification-service: notification_service
       dsrms-store-user: dsrms-store-user
+      dlt-topic-pattern: .*-dlq-topic #Any topic that ends with -dlq-topic will consume by common consumer grp
+    consumer-grp-id:
+      user-consumer-id: user-consumer
+      dlq-consumer-id: dlq-consumer
+
