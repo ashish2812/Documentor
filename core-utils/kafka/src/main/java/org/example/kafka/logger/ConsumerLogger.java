@@ -22,45 +22,13 @@ public class ConsumerLogger {
         for (Header header : consumerRecord.headers()) {
             if (header.key().equals(DocumentoConstants.MESSAGE_ID)) {
                 messageId = new String(header.value(), StandardCharsets.UTF_8); // for UTF-8 encoding
-                log.info("ConsumerLogger: Key:{}, value: {}",header.key(),messageId);
+                log.info("ConsumerLogger: Key:{}, value: {}", header.key(), messageId);
                 break;
             }
         }
-        if (messageId.isBlank()) {
-            log.info(
-                    """
-                            MessageId is null,
-                            Topic: {},
-                            Key: {},
-                            Value: {},
-                            Headers: {},
-                            """,
-
-                    topic,
-                    consumerRecord.key(),
-                    consumerRecord.value(),
-                    consumerRecord.headers()
-            );
-
-        } else {
-            log.info(
-                    """
-                            MessageId: {},
-                            Topic: {},
-                            Key: {},
-                            Value: {},
-                            Headers: {},
-                            """,
-
-                    messageId,
-                    topic,
-                    consumerRecord.key(),
-                    consumerRecord.value(),
-                    consumerRecord.headers()
-            );
-
-
-        }
+        log.info(
+                "messageId: {}, topic: {}, key: {}, value: {}, headers: {}", messageId, topic, consumerRecord.key(), consumerRecord.value(), consumerRecord.headers()
+        );
 
     }
 

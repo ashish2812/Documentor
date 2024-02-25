@@ -29,21 +29,17 @@ public class DeadLetterQueueProducer {
     public void sendToDlqTopic(KafkaTemplate<?, ?> kafkaTemplate,
                                ConsumerRecord<?, ?> consumerRecord,
                                Exception e) {
-
-
-
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate, DEFAULT_DESTINATION_RESOLVER);
-        consumerRecord = kafkaDeadLetterDlqConverter.kafkaDeadLetter(consumerRecord,e);
+        consumerRecord = kafkaDeadLetterDlqConverter.kafkaDeadLetter(consumerRecord, e, null);
         recoverer.accept(consumerRecord, e);
-        log.info("""
-                        Sending the exception to dlq for\s
-                         topic: {},\s
-                         partition: {}\s
-                        headers: {}\s
-                        """,
-                consumerRecord.topic(),
-                consumerRecord.partition(),
-                consumerRecord.headers().toString()
-        );
+        log.info("Sending the exception to dlq for topic: {}, partition: {} headers: {}", consumerRecord.topic(), consumerRecord.partition(), consumerRecord.headers().toString());
+    }
+
+    public void sendDataToDlqToUpdateForSuccess(KafkaTemplate<?, ?> kafkaTemplate, ConsumerRecord<?, ?> consumerRecord) {
+        consumerRecord = kafkaDeadLetterDlqConverter.kafkaDeadLetter(consumerRecord, null, (short) 0);
+        log.info("Preparing request for success: {}", consumerRecord.value());
+        DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate, DEFAULT_DESTINATION_RESOLVER);
+        recoverer.accept(consumerRecord, new Exception());
+
     }
 }

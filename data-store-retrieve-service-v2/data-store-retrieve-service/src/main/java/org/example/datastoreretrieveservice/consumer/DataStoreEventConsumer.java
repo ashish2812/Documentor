@@ -53,6 +53,7 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
             User user = objectMapper.readValue(records.value(), User.class);
             log.info("Records for use-->{}", user.getUserName()); //TODO:: Remove this
             ConsumerLogger.consumerInfoLogging(records);
+            deadLetterQueueProducer.sendDataToDlqToUpdateForSuccess(kafkaTemplate,records);
             acknowledgment.acknowledge();
         } catch (JsonProcessingException e) {
             ConsumerLogger.consumerInfoLogging(records);
@@ -73,6 +74,7 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
         try {
             ConsumerLogger.consumerInfoLogging(record);
             KafkaDeadLetterDto kafkaDeadLetterDto = objectMapper.readValue(record.value(), KafkaDeadLetterDto.class);
+            Short status = kafkaDeadLetterDto.getStatus();
             String messageId = kafkaDeadLetterDto.getMessageId();
             KafkaDeadLetter kafkaDeadLetter = retryRepository.findByMessageId(messageId);
             KafkaDeadLetter savingDataIntoDataBase;
@@ -81,6 +83,7 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
                 KafkaDeadLetter deadLetter = KafkaDeadLetter.builder()
                         .data(kafkaDeadLetterDto.getData())
                         .messageId(messageId)
+                        .status(status)
                         .exceptionClass(kafkaDeadLetterDto.getExceptionClass())
                         .exceptionMessage(kafkaDeadLetterDto.getExceptionMessage())
                         .isRetryableException(kafkaDeadLetterDto.getIsRetryableException())
@@ -95,12 +98,19 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
             } else {
                 isUpdateData = Boolean.TRUE;
                 KafkaDeadLetter deadLetter = KafkaDeadLetter.builder()
+                        .id(kafkaDeadLetter.getId())
                         .data(kafkaDeadLetterDto.getData())
                         .headers(kafkaDeadLetterDto.getHeaders())
                         .messageId(kafkaDeadLetter.getMessageId())
                         .clazzName(kafkaDeadLetterDto.getClazzName())
+                        .status(status)
+                        .lastAttemptedOn(kafkaDeadLetterDto.getLastAttemptedOn())
                         .topicName(kafkaDeadLetterDto.getTopicName())
-                        .totalAttempts(kafkaDeadLetter.getTotalAttempts())
+
+                        .totalAttempts(status.equals((short)1)
+                                ?kafkaDeadLetter.getTotalAttempts() + 1:
+                                kafkaDeadLetter.getTotalAttempts())
+
                         .isMailSent(Boolean.FALSE)
                         .exceptionClass(kafkaDeadLetterDto.getExceptionClass())
                         .exceptionMessage(kafkaDeadLetterDto.getExceptionMessage())
