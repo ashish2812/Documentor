@@ -3,6 +3,8 @@
  */
 package org.example.base.exceptions;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Ashish
@@ -10,7 +12,7 @@ package org.example.base.exceptions;
  * @date 24-Feb-2024
  *
  */
-public class NoRecordException extends RuntimeException {
+public class NoRecordException extends RuntimeException implements RetryableException, Serializable {
 
 	private static final long serialVersionUID = -3368655266237942363L;
 

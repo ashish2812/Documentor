@@ -9,10 +9,15 @@ import org.example.base.DocumentoConstants;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @author Ashish
+ * @date 04-Feb-2024
+ *
+ */
+
 @UtilityClass
 @Slf4j
 public class ConsumerLogger {
-
 
     public static void consumerInfoLogging(ConsumerRecord<String, String> consumerRecord) {
 

@@ -4,13 +4,18 @@ package org.example.datastoreretrieveservice.consumer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.example.base.enums.StatusEnum;
+import org.example.datastoreretrieveservice.UserServiceAndRetrive;
 import org.example.datastoreretrieveservice.model.KafkaDeadLetter;
+import org.example.datastoreretrieveservice.model.UserDetails;
 import org.example.datastoreretrieveservice.repository.KafkaRetryRepository;
+import org.example.datastoreretrieveservice.repository.UserDetailsRepository;
 import org.example.kafka.KafkaDeadLetterDlqConverter;
 import org.example.kafka.consumer.BaseConsumer;
 import org.example.kafka.logger.ConsumerLogger;
 import org.example.kafka.producer.DeadLetterQueueProducer;
 import org.example.pojo.dto.KafkaDeadLetterDto;
+import org.example.pojo.dto.UserRequestDTO;
 import org.example.pojo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -22,6 +27,12 @@ import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
+
+/**
+ * @author Ashish
+ * @date 04-Feb-2024
+ */
+
 
 @Log4j2
 @Service
@@ -40,8 +51,14 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
     @Autowired
     KafkaDeadLetterDlqConverter kafkaDeadLetterDlqConverter;
 
+    @Autowired
+    UserServiceAndRetrive userServiceAndRetrive;
+
+    @Autowired
+    UserDetailsRepository userDetailsRepository;
+
     @KafkaListener(
-            topics = {"${dsrms.kafka.topic.dsrms-store-user}"},
+            topics = {"${dsrms.kafka.topic.dsrms-create-user}"},
             autoStartup = "${spring.kafka.consumer.autostart}", idIsGroup = false,
             id = "${dsrms.kafka.consumer-grp-id.user-consumer-id}")
     public void receive(ConsumerRecord<String, String> records, Acknowledgment acknowledgment) {
@@ -50,12 +67,13 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
             return;
         }
         try {
-            User user = objectMapper.readValue(records.value(), User.class);
-            log.info("Records for use-->{}", user.getUserName()); //TODO:: Remove this
+            UserRequestDTO user = objectMapper.readValue(records.value(), UserRequestDTO.class);
             ConsumerLogger.consumerInfoLogging(records);
-            deadLetterQueueProducer.sendDataToDlqToUpdateForSuccess(kafkaTemplate,records);
+            UserDetails userDetails = userServiceAndRetrive.createUser(user);
+            userDetailsRepository.save(userDetails);
+            deadLetterQueueProducer.sendDataToDlqToUpdateForSuccess(kafkaTemplate, records);
             acknowledgment.acknowledge();
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             ConsumerLogger.consumerInfoLogging(records);
             deadLetterQueueProducer.sendToDlqTopic(kafkaTemplate, records, e);
             acknowledgment.acknowledge();
@@ -107,8 +125,8 @@ public class DataStoreEventConsumer<T> extends BaseConsumer<T> {
                         .lastAttemptedOn(kafkaDeadLetterDto.getLastAttemptedOn())
                         .topicName(kafkaDeadLetterDto.getTopicName())
 
-                        .totalAttempts(status.equals((short)1)
-                                ?kafkaDeadLetter.getTotalAttempts() + 1:
+                        .totalAttempts(status.equals(StatusEnum.FAILED.getValue())
+                                ? kafkaDeadLetter.getTotalAttempts() + 1 :
                                 kafkaDeadLetter.getTotalAttempts())
 
                         .isMailSent(Boolean.FALSE)

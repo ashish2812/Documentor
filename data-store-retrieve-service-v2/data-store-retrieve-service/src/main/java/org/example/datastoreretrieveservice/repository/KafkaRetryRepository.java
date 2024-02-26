@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Ashish
+ * @date 04-Feb-2024
+ *
+ */
 
 @Repository
 public interface KafkaRetryRepository extends JpaRepository<KafkaDeadLetter,Integer> {
