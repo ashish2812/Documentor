@@ -6,7 +6,7 @@ spring:
     name: Data-store-retrieve-service
   data:
     mongodb:
-      database: Document_processing_service
+      database: Data-store-retrieve-service
       host: localhost
       port: 27017
   datasource:
@@ -41,7 +41,8 @@ dsrms:
   kafka:
     topic:
       notification-service: notification_service
-      dsrms-store-user: dsrms-store-user
+      dsrms-create-user: dsrms-create-user
+      dsrms-retrieve-user: dsrms-retrieve-user
       dlt-topic-pattern: .*-dlq-topic #Any topic that ends with -dlq-topic will consume by common consumer grp
     consumer-grp-id:
       user-consumer-id: user-consumer

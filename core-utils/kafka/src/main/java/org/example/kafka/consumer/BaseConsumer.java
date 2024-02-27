@@ -11,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
+/**
+ * @author Ashish
+ * @date 04-Feb-2024
+ *
+ */
+
 @Log4j2
 public abstract class BaseConsumer<T> {
 

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
 import org.example.base.DocumentoConstants;
+import org.example.base.enums.StatusEnum;
 import org.example.pojo.dto.KafkaDeadLetterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * @author Ashish
+ * @date 04-Feb-2024
+ *
+ */
 @Service
 @Slf4j
 public class KafkaDeadLetterDlqConverter {
@@ -57,7 +63,7 @@ public class KafkaDeadLetterDlqConverter {
                 .createdOn(LocalDateTime.now())
                 .clazzName(record.key().toString())
                 .topicName(record.topic())
-                .status(Objects.nonNull(status)?status:1)
+                .status(Objects.nonNull(status)?status: StatusEnum.FAILED.getValue())
                 .build();
         String value;
         long offset = record.offset();

@@ -70,7 +70,18 @@ public class ExceptionCommonAdvice {
     public <T> ResponseDto<T> kafkaException(KafkaException e) {
 
         String exceptionId = getExceptionId();
-        log.error("Got DocumentorException for exceptionId: {}", exceptionId, e);
+        log.error("Got KafkaException for exceptionId: {}", exceptionId, e);
+
+        return ResponseDto.failure(e.getMessage(), exceptionId);
+    }
+
+
+    @ExceptionHandler(DocumentorValidationException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public <T> ResponseDto<T> validationException(DocumentorValidationException e) {
+
+        String exceptionId = getExceptionId();
+        log.error("Got DocumentorValidationException for exceptionId: {}", exceptionId, e);
 
         return ResponseDto.failure(e.getMessage(), exceptionId);
     }

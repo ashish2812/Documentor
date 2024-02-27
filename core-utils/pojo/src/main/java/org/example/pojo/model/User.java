@@ -3,6 +3,8 @@ package org.example.pojo.model;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,7 +15,10 @@ public class User {
     private String userName;
     private String name;
     private String lastName;
-    private String role;
     private String mobileNo;
     private String emailId;
+    private LocalDateTime modifiedAt;
+    private LocalDateTime createdAt;
+    private String role;
+    private String userStatusEnum;
 }

@@ -22,7 +22,8 @@ dpms:
   kafka:
     topic:
       notification-service: notification_service
-      dsrms-store-user: dsrms-store-user
+      dsrms-create-user: dsrms-create-user
+      dsrms-retrieve-user: dsrms-retrieve-user
 
 eureka:
   client:
