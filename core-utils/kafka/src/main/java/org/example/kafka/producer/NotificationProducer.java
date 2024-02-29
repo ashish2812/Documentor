@@ -6,7 +6,7 @@ package org.example.kafka.producer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.example.base.DocumentoConstants;
+import org.example.base.constants.DocumentoConstants;
 import org.example.base.exceptions.KafkaException;
 import org.example.base.utils.DocumentorUtils;
 import org.springframework.beans.factory.annotation.Autowired;

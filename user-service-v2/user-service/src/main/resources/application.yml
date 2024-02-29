@@ -1,0 +1,56 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    username: root
+    password: Hrhk@9090
+    url: jdbc:mysql://localhost:3306/task_management
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1 # This property specifies a SQL query that will be used to test the validity of a connection before it is returned from the pool.
+      minimum-idle: 5 # This property sets the minimum number of idle connections that HikariCP should maintain in the pool. Idle connections are not actively being used but are kept in the pool to handle future requests more efficiently.
+      maximum-pool-size: 20 # This property sets the maximum size of the connection pool. It determines the maximum number of connections that HikariCP can create to the database. If the pool reaches this limit, additional requests for connections will be queued until a connection becomes available or a timeout occurs.
+      idle-timeout: 30000 #This property sets the maximum time that a connection can remain idle in the pool. If a connection is idle for more than this specified time (in milliseconds), it may be closed and removed from the pool.
+      pool-name: user-service-mysql-pool
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      acks: 1
+      retries: 3  # Number of retries before giving up sending a message
+      batch-size: 16384  # Size of batches to send to Kafka
+      buffer-memory: 33554432  # Total memory size the producer can use to buffer records waiting to be sent to the server
+
+dpms:
+  kafka:
+    topic:
+      notification-service: notification_service
+      dsrms-create-user: dsrms-create-user
+      dsrms-retrieve-user: dsrms-retrieve-user
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    region: India-Haryana-Gurugram
+    healthcheck:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+  endpoint:
+    health:
+      show-details: always

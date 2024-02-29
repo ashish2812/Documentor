@@ -1,0 +1,38 @@
+# IDE-specific files
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+*.iml
+*.ipr
+*.iws
+*.iml/
+api-gateway-v2/api-gateway/.idea
+
+# Build-related files
+target/
+bin/
+build/
+
+# Dependency management
+*.jar
+*.war
+*.ear
+*.log
+
+# Maven-specific files
+
+# Gradle-specific files
+build/
+.gradle/
+
+# Spring Boot-specific files
+*.log
+hs_err_pid*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+

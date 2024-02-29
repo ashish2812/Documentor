@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
-import org.example.base.DocumentoConstants;
+import org.example.base.constants.DocumentoConstants;
 
 import java.nio.charset.StandardCharsets;
 

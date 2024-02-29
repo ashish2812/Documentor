@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.example.base.DocumentoConstants;
+import org.example.base.constants.DocumentoConstants;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 
