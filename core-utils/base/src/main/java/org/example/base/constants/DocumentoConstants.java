@@ -1,4 +1,4 @@
-package org.example.base;
+package org.example.base.constants;
 
 import lombok.experimental.UtilityClass;
 
