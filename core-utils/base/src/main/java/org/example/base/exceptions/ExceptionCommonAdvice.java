@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.example.base.commonDTO.ResponseDto;
 import org.example.base.constants.DocumentorConstants;
+import org.example.base.constants.ExceptionCodeConstants;
 import org.example.base.utils.DocumentorUtils;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author Ashish
- *
  * @date 04-Feb-2024
- *
  **/
 
 @RestControllerAdvice
@@ -30,7 +29,7 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got NoRecordException for exceptionId: {} with Message: {}", exceptionId, e);
 
-        return ResponseDto.failure(e.getMessage(), exceptionId);
+        return ResponseDto.failure(e.getMessage(), exceptionId,ExceptionCodeConstants.NO_VALID_RECORD_FOUND_ERROR_CODE);
     }
     
     @ExceptionHandler(Exception.class)
@@ -40,7 +39,7 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got un-handled exception for exceptionId: {}", exceptionId, ex);
 
-        return ResponseDto.failure(ex.getMessage(), exceptionId);
+        return ResponseDto.failure(ex.getMessage(), exceptionId, ExceptionCodeConstants.SERVER_EXCEPTION_CODE);
     }
 
 
@@ -51,7 +50,7 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got IllegalArgumentException for exceptionId: {} with Message {}", exceptionId, e.getMessage());
 
-        return ResponseDto.failure(e.getMessage(), exceptionId);
+        return ResponseDto.failure(e.getMessage(), exceptionId, ExceptionCodeConstants.IILEGAL_EXCEPTION_CODE);
     }
 
     @ExceptionHandler(DocumentorException.class)
@@ -61,7 +60,7 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got DocumentorException for exceptionId: {}", exceptionId, e);
 
-        return ResponseDto.failure(e.getMessage(), exceptionId);
+        return ResponseDto.failure(e.getMessage(), exceptionId, DocumentorException.DOCUMENTOR_EXCEPTION_CODE);
     }
 
 
@@ -72,7 +71,7 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got KafkaException for exceptionId: {}", exceptionId, e);
 
-        return ResponseDto.failure(e.getMessage(), exceptionId);
+        return ResponseDto.failure(e.getMessage(), exceptionId, ExceptionCodeConstants.KAFKA_EXCEPTION_CODE);
     }
 
 
@@ -83,9 +82,8 @@ public class ExceptionCommonAdvice {
         String exceptionId = getExceptionId();
         log.error("Got DocumentorValidationException for exceptionId: {}", exceptionId, e);
 
-        return ResponseDto.failure(e.getMessage(), exceptionId);
+        return ResponseDto.failure(e.getMessage(), exceptionId,DocumentorValidationException.DOCUMENTOR_EXCEPTION_VALIDATION_CODE);
     }
-
 
 
     private String getExceptionId() {

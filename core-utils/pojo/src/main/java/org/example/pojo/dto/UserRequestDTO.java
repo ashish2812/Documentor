@@ -32,6 +32,9 @@ public class UserRequestDTO {
     @JsonProperty("emailId")
     private String emailId;
 
+    @JsonProperty("password")
+    private String password;
+
     @JsonProperty("modifiedAt")
     private LocalDateTime modifiedAt;
 

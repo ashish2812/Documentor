@@ -30,11 +30,10 @@ public class CommonValidations {
     }
 
     public static <T extends Enum<T>> Boolean validateEnum(String enumValue, Class<T> enumClass) {
-        log.info("Validating the Enums");
         if (CommonUtils.isValidString(enumValue)) {
             try {
                 //TODO: Fix this retuning: Validating for enumValue: ADMIN, with class: Class
-                log.info("Validating for enumValue: {}, with class: {}",enumValue,enumClass.getClass().getSimpleName());
+                log.info("Validating for enumValue: {}, with class: {}", enumValue, enumClass.getClass().getSimpleName());
                 Enum.valueOf(enumClass, enumValue);
                 return true;
             } catch (IllegalArgumentException e) {
