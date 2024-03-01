@@ -3,6 +3,8 @@
  */
 package org.example.base.exceptions;
 
+import org.example.base.constants.ExceptionCodeConstants;
+
 /**
  * @author Ashish
  *
@@ -12,6 +14,8 @@ package org.example.base.exceptions;
 public class DocumentorException extends RuntimeException {
 
 	private static final long serialVersionUID = -3368655266237942363L;
+
+	public final static String DOCUMENTOR_EXCEPTION_CODE = ExceptionCodeConstants.DOCUMENTOR_EXCEPTION_CODE;
 
 	public DocumentorException(String message) {
 		super(message);

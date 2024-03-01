@@ -1,11 +1,12 @@
 package org.example.userservice.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.base.enums.RoleEnum;
 import org.example.base.enums.UserStatusEnum;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "User")
+@Table(name = "User",
+        indexes = {
+                @Index(name = "idx_username", columnList = "username"),
+                @Index(name = "idx_email", columnList = "emailId")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_email", columnNames = "email"),
+                @UniqueConstraint(name = "uk_username", columnNames = "username")})
 @NoArgsConstructor
 public class UserDetails {
 

@@ -11,7 +11,7 @@ public class CommonUtils {
     private static final ModelMapper modelMapper = new ModelMapper();
 
     public static Boolean isValidString(String value){
-        return Objects.nonNull(value);
+        return Objects.nonNull(value) && !value.isEmpty();
     }
 
     public static <T> Set<T> enumValuesInList(Class<T> enumCls) {

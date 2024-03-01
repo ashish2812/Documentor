@@ -19,17 +19,9 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseDto<UserResponseDTO> saveUserInfo(@RequestBody UserRequestDTO userRequestDTO) {
-        try {
             UserResponseDTO u = userService.saveUser(userRequestDTO);
             log.info("User created {}", u);
             return ResponseDto.success("User created successfully.", u);
-        } catch (DocumentorException documentorException) {
-            log.error("Error in Creating User, Error is ", documentorException);
-            return ResponseDto.failure(documentorException.getMessage());
-        } catch (Exception e) {
-            log.error("Error in Create User, error is ", e);
-            return ResponseDto.failure(e.getMessage());
-        }
     }
 
     @GetMapping("/get")
