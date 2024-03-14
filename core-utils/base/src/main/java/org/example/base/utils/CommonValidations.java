@@ -9,6 +9,7 @@ import org.example.base.exceptions.DocumentorValidationException;
 import org.example.base.utils.CommonUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 @Service
@@ -44,6 +45,10 @@ public class CommonValidations {
 
         log.info("Validation failed for enum");
         throw new DocumentorValidationException("Enum value is null or empty");
+    }
+
+    public static ArrayList<RoleEnum> getRoleList(){
+        return new ArrayList<>(roleEnums);
     }
 
 }

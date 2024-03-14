@@ -33,6 +33,7 @@
         <spring-boot-starter-log4j2.version>3.2.2</spring-boot-starter-log4j2.version>
         <lombok.version>1.18.30</lombok.version>
         <model.mapper.version>3.2.0</model.mapper.version>
+        <jwtt.version>0.11.5</jwtt.version>
     </properties>
     <dependencyManagement>
 
@@ -107,6 +108,35 @@
                 <version>${model.mapper.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwtt.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwtt.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.jsonwebtoken</groupId>
+                        <artifactId>jjwt-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwtt.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.jsonwebtoken</groupId>
+                        <artifactId>jjwt-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -15,7 +15,7 @@ public class ApiLocator {
     public RouteLocator getwayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/user/**") //url for the user-service
+                        .path("/api/v1/user/**") //url for the user-service
                         .uri("lb://user-service") //LoadBalancer of user-service that are the instances registered in eureka server
                 )
                 .build();

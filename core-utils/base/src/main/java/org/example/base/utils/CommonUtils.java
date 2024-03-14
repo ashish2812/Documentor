@@ -3,6 +3,9 @@ package org.example.base.utils;
 import lombok.experimental.UtilityClass;
 import org.modelmapper.ModelMapper;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @UtilityClass
@@ -22,5 +25,17 @@ public class CommonUtils {
     //Converts One class to another class having same fields
     public static <T, U> U convert(T source, Class<U> destinationClass) {
         return modelMapper.map(source, destinationClass);
+    }
+
+    public static LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+    }
+
+    public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 }

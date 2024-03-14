@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
+
 
 /**
  * @author Ashish
@@ -81,6 +83,16 @@ public class ExceptionCommonAdvice {
 
         String exceptionId = getExceptionId();
         log.error("Got DocumentorValidationException for exceptionId: {}", exceptionId, e);
+
+        return ResponseDto.failure(e.getMessage(), exceptionId,DocumentorValidationException.DOCUMENTOR_EXCEPTION_VALIDATION_CODE);
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public <T> ResponseDto<T> validationException(IOException e) {
+
+        String exceptionId = getExceptionId();
+        log.error("Got IO Exception for exceptionId: {}", exceptionId, e);
 
         return ResponseDto.failure(e.getMessage(), exceptionId,DocumentorValidationException.DOCUMENTOR_EXCEPTION_VALIDATION_CODE);
     }

@@ -55,6 +55,11 @@
             <version>${global.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>JwtUtility</artifactId>
+            <version>${global.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
@@ -68,10 +73,10 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
-        <!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -107,8 +112,8 @@
             </plugin>
         </plugins>
     </build>
-<!--<modules>-->
-<!--    <module>../core-utils/kafka</module>-->
-<!--    <module>../core-utils/base</module>-->
-<!--</modules>-->
+    <!--<modules>-->
+    <!--    <module>../core-utils/kafka</module>-->
+    <!--    <module>../core-utils/base</module>-->
+    <!--</modules>-->
 </project>

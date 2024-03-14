@@ -16,6 +16,7 @@ import org.example.userservice.repository.UserDetailsRepository;
 import org.example.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,7 +40,7 @@ public class UserServiceImp implements UserService {
     public UserResponseDTO saveUser(UserRequestDTO userRequestDTO) {
         UserDetails userDetails = null;
         try {
-            userDetails =  processUserRequestAsync(userRequestDTO).get();
+            userDetails = processUserRequestAsync(userRequestDTO).get();
         } catch (InterruptedException e) {
             throw new RuntimeException(e.getCause());
         } catch (ExecutionException e) {
@@ -79,7 +80,7 @@ public class UserServiceImp implements UserService {
                 log.info("Saving user info into user db");
                 return saveDetailsToDB(userRequestDTO);
             } catch (DocumentorException e) {
-                log.info("Exception occurred while saving user data into DB, username: {}",userRequestDTO.getUserName());
+                log.info("Exception occurred while saving user data into DB, username: {}", userRequestDTO.getUserName());
                 exceptionallyCompleted.completeExceptionally(new DocumentorException(e.getMessage()));
                 return exceptionallyCompleted.join();  // Wait for the exceptionallyCompleted future to complete exceptionally
             }
@@ -100,6 +101,8 @@ public class UserServiceImp implements UserService {
     private UserDetails saveDetailsToDB(UserRequestDTO userRequestDTO) {
         UserDetails userDetails = null;
         try {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(userRequestDTO.getPassword());
             userDetails = new UserDetails();
             userDetails.setUserName(userRequestDTO.getUserName());
             userDetails.setName(userRequestDTO.getName());
@@ -112,7 +115,7 @@ public class UserServiceImp implements UserService {
                     : UserStatusEnum.valueOf(userRequestDTO.getUserStatusEnum()));
             userDetails.setCreatedAt(LocalDateTime.now());
             userDetails.setModifiedAt(null);
-            userDetails.setPassword(userRequestDTO.getPassword());
+            userDetails.setPassword(encodedPassword);
             userDetailsRepository.save(userDetails);
         } catch (DataIntegrityViolationException e) {
             throw new DocumentorException(e.getCause().getLocalizedMessage());
@@ -122,3 +125,4 @@ public class UserServiceImp implements UserService {
         return userDetails;
     }
 }
+
